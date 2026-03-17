@@ -1,4 +1,4 @@
-# 🤖 Eng Bot — Engineering Assistant for Microsoft Teams
+# 🤖 TARS — Engineering Assistant for Microsoft Teams
 
 An AI-powered Teams bot that gives you instant access to your Linear board and GitHub repos, powered by OpenAI GPT-4o.
 
@@ -37,14 +37,14 @@ Linear GraphQL API   GitHub REST API
 ### Step 1: Create an App Registration in Azure
 
 1. Go to [Azure Portal](https://portal.azure.com) → search **"App Registrations"** → click **New registration**
-2. Give it a name like `eng-bot`
+2. Give it a name like `tars`
 3. Under **Supported account types**, select **Single tenant**
 4. Click **Register**
 5. On the Overview page, copy:
    - **Application (client) ID** → save as `MICROSOFT_APP_ID`
    - **Directory (tenant) ID** → save as `MICROSOFT_TENANT_ID`
 6. Go to **Certificates & secrets** → **Client secrets** tab → **+ New client secret**
-7. Add a description (e.g. "Eng Bot"), choose expiry (24 months), click **Add**
+7. Add a description (e.g. "TARS"), choose expiry (24 months), click **Add**
 8. ⚠️ Immediately copy the **Value** (not the Secret ID) → save as `MICROSOFT_APP_PASSWORD`. You cannot see it again after leaving the page.
 
 ---
@@ -53,9 +53,9 @@ Linear GraphQL API   GitHub REST API
 
 1. In the Azure Portal search bar, type **"Azure Bot"** → click **Azure Bot** under Marketplace
 2. Click **+ Create** and fill in:
-   - **Bot handle**: a unique name e.g. `eng-bot-yourcompany`
+   - **Bot handle**: a unique name e.g. `tars-yourcompany`
    - **Subscription**: your subscription
-   - **Resource group**: click Create new → name it `eng-bot-rg` → pick your region
+   - **Resource group**: click Create new → name it `tars-rg` → pick your region
    - **Pricing tier**: click Change plan → select **F0 (Free)**
    - **Type of App**: **Single Tenant**
    - **App ID**: paste your `MICROSOFT_APP_ID` from Step 1
@@ -99,7 +99,7 @@ Linear GraphQL API   GitHub REST API
 ### Step 5: Install and run locally
 
 ```bash
-cd eng-bot
+cd tars
 
 # Install dependencies
 npm install
@@ -163,14 +163,14 @@ Free ngrok accounts get a **static domain** — your URL won't change on restart
 1. Create a zip with exactly these 3 files (no subfolders):
 
 ```powershell
-cd c:\path\to\eng-bot\config
-Compress-Archive -Path manifest.json, color.png, outline.png -DestinationPath ..\engbot.zip -Force
+cd c:\path\to\tars\config
+Compress-Archive -Path manifest.json, color.png, outline.png -DestinationPath ..\tars.zip -Force
 cd ..
 ```
 
 2. In **Microsoft Teams** → **Apps** (left sidebar) → **Manage your apps** (bottom left) → **Upload an app** → **Upload a custom app**
-3. Select `engbot.zip`
-4. Find **Eng Bot** in your apps and start a chat
+3. Select `tars.zip`
+4. Find **TARS** in your apps and start a chat
 
 > ⚠️ The `validDomains` field in `manifest.json` must contain your ngrok domain, otherwise Teams will reject the manifest.
 
@@ -202,8 +202,8 @@ Once deployed, replace every reference to your ngrok URL with your real public U
 2. **`config/manifest.json` → `validDomains`** → replace the ngrok domain with your real domain, then re-zip and re-upload to Teams
 
 ```bash
-docker build -t eng-bot .
-docker run -p 3978:3978 --env-file .env eng-bot
+docker build -t tars .
+docker run -p 3978:3978 --env-file .env tars
 ```
 
 ---
@@ -225,7 +225,7 @@ CMD ["node", "src/index.js"]
 ## Project structure
 
 ```
-eng-bot/
+tars/
 ├── src/
 │   ├── index.js          # HTTP server + bot adapter
 │   ├── bot.js            # Teams bot activity handler
