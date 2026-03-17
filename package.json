@@ -1,0 +1,26 @@
+{
+  "name": "eng-bot",
+  "version": "1.0.0",
+  "description": "Eng Bot for Microsoft Teams — Linear + GitHub + Claude",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "test": "jest --testPathPattern=tests/",
+    "test:watch": "jest --testPathPattern=tests/ --watch",
+    "test:coverage": "jest --testPathPattern=tests/ --coverage"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.24.0",
+    "@octokit/rest": "^20.0.2",
+    "axios": "^1.6.0",
+    "botbuilder": "^4.22.0",
+    "dotenv": "^16.3.1",
+    "openai": "^6.29.0",
+    "restify": "^11.1.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "nodemon": "^3.0.1"
+  }
+}

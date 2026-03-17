@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/
+
+# Environment variables (contains API keys and secrets — never commit)
+.env
+
+# Build output
+dist/
+build/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Teams app package (generated artifact)
+*.zip
+
+# Editor
+.vscode/
+.idea/

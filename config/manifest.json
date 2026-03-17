@@ -1,0 +1,59 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.16",
+  "version": "1.0.0",
+  "id": "38721fd8-1f2a-4e54-9ef8-3441b2da40ea",
+  "packageName": "com.yourcompany.tars",
+  "developer": {
+    "name": "Your Company",
+    "websiteUrl": "https://yourcompany.com",
+    "privacyUrl": "https://yourcompany.com/privacy",
+    "termsOfUseUrl": "https://yourcompany.com/terms"
+  },
+  "name": {
+    "short": "TARS",
+    "full": "TARS — Engineering Assistant"
+  },
+  "description": {
+    "short": "Query Linear, GitHub, and get engineering answers",
+    "full": "TARS is your engineering assistant in Microsoft Teams. Query Linear boards, update stories, check GitHub PRs, search code, and get answers to engineering questions — without ceremony."
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "accentColor": "#5E6AD2",
+  "bots": [
+    {
+      "botId": "38721fd8-1f2a-4e54-9ef8-3441b2da40ea",
+      "scopes": ["personal", "team", "groupchat"],
+      "supportsFiles": false,
+      "isNotificationOnly": false,
+      "commandLists": [
+        {
+          "scopes": ["personal", "team"],
+          "commands": [
+            {
+              "title": "issues",
+              "description": "Show current sprint issues"
+            },
+            {
+              "title": "prs",
+              "description": "Show open pull requests"
+            },
+            {
+              "title": "blockers",
+              "description": "Show urgent/blocked issues"
+            },
+            {
+              "title": "help",
+              "description": "Show what I can do"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "permissions": ["identity", "messageTeamMembers"],
+  "validDomains": ["grottolike-shona-deposable.ngrok-free.dev"]
+}
