@@ -27,7 +27,18 @@ var mockGitHub = {
   listBranches: jest.fn(),
 };
 
+var mockOutlook = {
+  listEmails:   jest.fn(),
+  getEmail:     jest.fn(),
+  searchEmails: jest.fn(),
+  listEvents:   jest.fn(),
+};
+
 var mockChatCreate = jest.fn();
+
+jest.mock('../src/outlookClient', () => ({
+  OutlookClient: jest.fn(() => mockOutlook),
+}));
 
 jest.mock('../src/linearClient', () => ({
   LinearClient: jest.fn(() => mockLinear),

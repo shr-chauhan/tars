@@ -48,8 +48,8 @@ describe('EngBot', () => {
       this.onMembersAdded = (handler) => { membersAddedHandler = handler; };
     });
 
-    const { EngBot } = require('../src/bot');
-    bot = new EngBot();
+    const { TARSBot } = require('../src/bot');
+    bot = new TARSBot();
   });
 
   // ── constructor ────────────────────────────────────────────────────────────
@@ -228,7 +228,7 @@ describe('EngBot', () => {
 
       expect(ctx.sendActivity).toHaveBeenCalledTimes(1);
       const msg = ctx.sendActivity.mock.calls[0][0];
-      expect(msg).toContain('Eng Bot');
+      expect(msg).toContain('TARS online');
     });
 
     it('does not send a welcome message to the bot itself', async () => {
