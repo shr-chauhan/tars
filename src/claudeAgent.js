@@ -1,10 +1,12 @@
 const OpenAI = require('openai');
 const { LinearClient } = require('./linearClient');
 const { GitHubClient } = require('./githubClient');
+const { OutlookClient } = require('./outlookClient');
 
 const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 const linear = new LinearClient();
 const github = new GitHubClient();
+const outlook = new OutlookClient();
 
 // ─── Tool definitions for OpenAI ────────────────────────────────────────────
 
@@ -97,6 +99,68 @@ const TOOLS = [
         type: 'object',
         properties: {
           teamName: { type: 'string', description: 'Team name (optional, gets all active cycles if omitted)' },
+        },
+      },
+    },
+  },
+
+  // ── Outlook tools ──
+  {
+    type: 'function',
+    function: {
+      name: 'outlook_list_emails',
+      description: "List recent emails from Outlook. Use for: 'show my emails', 'what's in my inbox', 'any unread emails', 'show emails from today'.",
+      parameters: {
+        type: 'object',
+        properties: {
+          folder:     { type: 'string',  description: "Mailbox folder: 'inbox' (default), 'sentitems', or 'drafts'" },
+          limit:      { type: 'number',  description: 'Number of emails to return (default 10, max 25)' },
+          unreadOnly: { type: 'boolean', description: 'If true, return only unread emails' },
+        },
+      },
+    },
+  },
+  {
+    type: 'function',
+    function: {
+      name: 'outlook_get_email',
+      description: 'Get the full content of a specific email by its ID. Use after listing emails to read the body of a particular message.',
+      parameters: {
+        type: 'object',
+        properties: {
+          emailId: { type: 'string', description: 'The email ID returned from outlook_list_emails or outlook_search_emails' },
+        },
+        required: ['emailId'],
+      },
+    },
+  },
+  {
+    type: 'function',
+    function: {
+      name: 'outlook_search_emails',
+      description: "Search emails by keyword, sender, or subject. Use for: 'find emails from Alice', 'emails about the budget', 'search for invoice emails'.",
+      parameters: {
+        type: 'object',
+        properties: {
+          query: { type: 'string', description: 'Search term — keywords, a sender name, subject text, or any phrase to find in email content' },
+          limit: { type: 'number', description: 'Number of results (default 10)' },
+        },
+        required: ['query'],
+      },
+    },
+  },
+
+  {
+    type: 'function',
+    function: {
+      name: 'outlook_list_events',
+      description: "List calendar events/meetings. Use for: 'what are my meetings today', 'what's on my calendar', 'do I have any meetings tomorrow', 'show me this week's meetings'.",
+      parameters: {
+        type: 'object',
+        properties: {
+          date:  { type: 'string', description: 'ISO date string for the start date e.g. "2026-03-20". Defaults to today.' },
+          days:  { type: 'number', description: 'Number of days to fetch from the start date (default 1). Use 7 for a week view.' },
+          limit: { type: 'number', description: 'Max events to return (default 20)' },
         },
       },
     },
@@ -219,6 +283,8 @@ Your personality:
 Your capabilities:
 - Query and update Linear issues, sprints, cycles, and teams
 - Query GitHub PRs, issues, commits, and code
+- Read and search the owner's Outlook inbox — list recent emails, fetch full content, search by keyword or sender
+- Read the owner's calendar — list meetings for today, tomorrow, or any date range
 - Answer engineering questions drawing on both sources
 
 Guidelines:
@@ -303,6 +369,11 @@ class ClaudeAgent {
       case 'github_search_code':   return github.searchCode(input);
       case 'github_list_repos':    return github.listRepos();
       case 'github_list_branches': return github.listBranches(input);
+      // Outlook
+      case 'outlook_list_emails':   return outlook.listEmails(input);
+      case 'outlook_get_email':     return outlook.getEmail(input);
+      case 'outlook_search_emails': return outlook.searchEmails(input);
+      case 'outlook_list_events':   return outlook.listEvents(input);
       default:
         throw new Error(`Unknown tool: ${name}`);
     }

@@ -2,6 +2,7 @@
   "name": "eng-bot",
   "version": "1.0.0",
   "description": "Eng Bot for Microsoft Teams — Linear + GitHub + Claude",
+  "license": "MIT",
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",

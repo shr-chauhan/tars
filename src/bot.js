@@ -64,9 +64,10 @@ class TARSBot extends ActivityHandler {
         if (member.id !== context.activity.recipient.id) {
           await context.sendActivity(
             `**TARS online.**\n\n` +
-            `I have access to Linear and GitHub. Tell me what you need.\n\n` +
+            `I have access to Linear, GitHub, and Outlook. Tell me what you need.\n\n` +
             `- Linear: issues, stories, sprint status, cycle progress\n` +
-            `- GitHub: PRs, commits, open issues, code search\n\n` +
+            `- GitHub: PRs, commits, open issues, code search\n` +
+            `- Outlook: inbox, unread emails, search by keyword or sender\n\n` +
             `_Honesty setting: 90%. Humor setting: somewhere between dry and arid._`
           );
         }
