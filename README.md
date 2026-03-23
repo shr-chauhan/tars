@@ -261,3 +261,11 @@ Schedule a daily summary using cron and post to a Teams channel.
 ### Integrate a logging / observability platform
 
 Connect the bot to a logging platform like Sentry, Datadog, or Grafana and it can bridge production incidents with code in a single conversation — e.g. *"A customer is reporting slowness in payments, can you check the logs and identify any bottlenecks?"* The bot can pull recent errors or traces and cross-reference them against the relevant code.
+
+---
+
+## License
+
+MIT © 2026 TARS
+
+See [LICENSE](./LICENSE) for the full text.
